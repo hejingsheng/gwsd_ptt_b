@@ -121,7 +121,7 @@
       <!-- <MinimalRebuild /> -->
       <ExceptionHandling>false</ExceptionHandling>
       <!-- 添加 RuntimeLibrary 和编译选项 -->
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
