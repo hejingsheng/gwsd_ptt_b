@@ -25,9 +25,13 @@ typedef void (*print_log_cb)(char *log);
 
 DLL_EXPORT int pttInit(GWPttEvent cb, GWMsgEvent cb1, GWPttAudioModule *audioModule, char externalCodec, int encodeLevel, int framesize, int frameNum, char softAec);
 
+DLL_EXPORT int pttInitFull(GWPttEvent cb, GWMsgEvent cb1, GWPttAudioModule *audioModule, char externalCodec, int encodeLevel, int framesize, int frameNum, char softAec);
+
 DLL_EXPORT int pttInitMini(GWPttEvent cb, GWPttAudioModule *audioModule, char externalCodec, int encodeLevel, int framesize, int frameNum, char softAec);
 
 DLL_EXPORT int pttSetLogCallback(int level, print_log_cb cb);
+
+DLL_EXPORT int pttControlLog(int level, char logToFile);
 
 DLL_EXPORT int pttSetQueuePath(const char *path);
 

@@ -20,6 +20,12 @@ extern "C" {
 #define GW_PTT_ENCODE_LEVEL_MID            1
 #define GW_PTT_ENCODE_LEVEL_HIGH           2
 
+#define GW_PTT_LOG_LEVEL_DEBUG   1
+#define GW_PTT_LOG_LEVEL_INFO    2
+#define GW_PTT_LOG_LEVEL_WARN    3
+#define GW_PTT_LOG_LEVEL_ERROR   4
+#define GW_PTT_LOG_LEVEL_NEVER   5
+
 enum {
     GW_PTT_SPEAK_START = 0,
     GW_PTT_SPEAK_END = 1,
@@ -183,7 +189,11 @@ int gwPttConfigServer(int type, char *host, int port);
 
 int gwPttSaveVoice(int open, char *path);
 
+int gwPttControlLog(int level, const char *logfile);
+
 int gwPttNetCheck(int type, char *host, int port);
+
+int gwPttEnableMsg(int enable);
 
 int gwPttLogin(const char *account, const char *pass, const char *imei, const char *iccid);
 
