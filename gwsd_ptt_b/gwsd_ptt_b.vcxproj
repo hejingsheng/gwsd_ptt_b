@@ -20,12 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cJSON.c" />
+    <ClCompile Include="datalist.c" />
     <ClCompile Include="gwdemo.c" />
     <ClCompile Include="GWLog.c" />
     <ClCompile Include="ptt_main.c" />
+    <ClCompile Include="WinAudioDevice.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cJSON.h" />
+    <ClInclude Include="datalist.h" />
     <ClInclude Include="GWLog.h" />
     <ClInclude Include="GWPttAudioDevice.h" />
     <ClInclude Include="GWPttEngine.h" />
@@ -34,6 +37,7 @@
     <ClInclude Include="lc-switch.h" />
     <ClInclude Include="lc.h" />
     <ClInclude Include="pt.h" />
+    <ClInclude Include="WinAudioDevice.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -62,7 +66,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141_xp</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <!-- 改为 v141_xp -->
     <CharacterSet>MultiByte</CharacterSet>
     <!-- 改为 MultiByte -->
@@ -96,11 +100,11 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>E:\work\VSProject\gwsd_ptt_b\gwsd_ptt_b\gwsdpttlib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>E:\work\VSProject\gwsd_ptt_b\gwsd_ptt_b\gwsdpttlib\x86;E:\work\VSProject\gwsd_ptt_b\gwsd_ptt_b\sdl2\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>E:\work\VSProject\gwsd_ptt_b\gwsd_ptt_b\gwsdpttlib\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>E:\work\VSProject\gwsd_ptt_b\gwsd_ptt_b\gwsdpttlib\x64;E:\work\VSProject\gwsd_ptt_b\gwsd_ptt_b\sdl2\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -115,7 +119,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_WINDOWS;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;_WINSOCKAPI_;__WINDOWS__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDOWS;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;_WINSOCKAPI_;__WINDOWS__;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <!-- 移除 ConformanceMode 和 MinimalRebuild -->
       <!-- <ConformanceMode>false</ConformanceMode> -->
       <!-- <MinimalRebuild /> -->
@@ -129,13 +133,14 @@
       <UseFullPaths>false</UseFullPaths>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <AdditionalIncludeDirectories>E:\work\VSProject\gwsd_ptt_b\gwsd_ptt_b\sdl2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <!-- 确保没有 LanguageStandard 设置 -->
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>gwsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gwptt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -145,7 +150,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;_WINSOCKAPI_;__WINDOWS__;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;_WINSOCKAPI_;__WINDOWS__;WIN32;_WINDOWS;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <!-- 添加 RuntimeLibrary 和编译选项 -->
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -155,11 +160,12 @@
       <UseFullPaths>false</UseFullPaths>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+      <AdditionalIncludeDirectories>E:\work\VSProject\gwsd_ptt_b\gwsd_ptt_b\sdl2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>gwsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gwptt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

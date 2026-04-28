@@ -27,6 +27,12 @@
     <ClCompile Include="ptt_main.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="datalist.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="WinAudioDevice.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cJSON.h">
@@ -54,6 +60,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="pt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="datalist.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="WinAudioDevice.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

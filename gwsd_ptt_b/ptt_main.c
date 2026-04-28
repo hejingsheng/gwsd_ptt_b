@@ -16,9 +16,10 @@
 #include "cJSON.h"
 #include "GWLog.h"
 #include "GWPttEngine.h"
+#include "WinAudioDevice.h"
 
 #pragma comment(lib, "ws2_32.lib")
-#pragma comment(lib, "gwsd.lib")
+#pragma comment(lib, "gwptt.lib")
 
 #define WM_USER_MESSAGE (WM_USER + 100)
 
@@ -918,112 +919,22 @@ static void initTimer()
 	}
 }
 
-// simulate audio device
-static DWORD record_thread_id = 0;
-static char speaking = 0;
-void *record_thread(void *param)
-{
-	FILE *fp = fopen("speaker.pcm", "rb");
-	if (fp == NULL)
-	{
-		return NULL;
-	}
-	int size = ftell(fp);
-	fseek(fp, 0, SEEK_SET);
-	while (speaking)
-	{
-		char pcm[320];
-		int size;
-		size = fread(pcm, 1, 320, fp);
-		if (size <= 0)
-		{
-			break;
-		}
-		pttOnPcmData(pcm, 320);
-		Sleep(10);
-	}
-	fclose(fp);
-	return NULL;
-}
-
-static void startRecord()
-{
-	// start record non block
-	speaking = 1;
-	CreateThread(
-		NULL,                   // 默认安全属性
-		3072,             // 堆栈大小
-		(LPTHREAD_START_ROUTINE)record_thread,   // 线程入口函数
-		NULL,                   // 参数
-		0,                      // 创建标志，0表示立即运行
-		&record_thread_id);
-}
-
-static void stopRecord()
-{
-	// stop record non block
-	speaking = 0;
-}
-
-static void startPlay()
-{
-	// start play non block
-}
-
-static void stopPlay()
-{
-	// stop play non block
-}
-
-void write_to_file(char *data, int len)
-{
-	FILE *fp = fopen("play.pcm", "ab");
-
-	fwrite(data, 1, len, fp);
-
-	fclose(fp);
-}
-
-static void playbackPlayData(char *pcm, int len)
-{
-	// write wav data to play device
-	printf("recv play data %d\n", len);
-	write_to_file(pcm, len);
-
-}
-
-static void muteSpeaker(char mute)
-{
-
-}
-
-static void muteRecorder(char mute)
-{
-}
-
-static GWPttAudioModule pttAudioDevice = {
-		.startPlay = startPlay,
-		.stopPlay = stopPlay,
-		.playData = playbackPlayData,
-		.startRecord = startRecord,
-		.stopRecord = stopRecord,
-		.muteSpeaker = muteSpeaker,
-		.muteRecorder = muteRecorder,
-};
-
 void pttClientStart(const char *account, const char *password, const char *dns, int port, int msgport)
 {
 	HANDLE th = NULL;
+	GWPttAudioModule *pttAudioDevice;
+	char *version = NULL;
 
 	printf("GWPttClient Start...\n");
 
 	initTimer();
+	pttAudioDevice = windowInitAudioDevice(GW_PTT_AUDIO_SAMPLERATE, GW_PTT_AUDIO_BITS, GW_PTT_AUDIO_CHANNELS);
 
-	char *version = NULL;
 	version = pttGetVersion();
 	printf("gw ptt version %s\n", version);
+	pttControlLog(1, 1);
 
-	pttInit(onGWPttEvent, onGWMsgEvent, &pttAudioDevice, 0, GW_PTT_ENCODE_LEVEL_HIGH, 0, 0, 0);
+	pttInit(onGWPttEvent, onGWMsgEvent, pttAudioDevice, 0, GW_PTT_ENCODE_LEVEL_HIGH, 0, 0, 0);
 
 	pttClient = (PttClient*)malloc(sizeof(PttClient));
 	assert(pttClient != NULL);
