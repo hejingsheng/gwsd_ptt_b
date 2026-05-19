@@ -2,8 +2,8 @@
 // Created by hejingsheng on 2024/5/8.
 //
 
-#ifndef GWSD_GWSD_PTT_H
-#define GWSD_GWSD_PTT_H
+#ifndef GW_GW_PTT_H
+#define GW_GW_PTT_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -180,8 +180,9 @@ typedef struct
 typedef void (*GWPttEvent)(int event, char *data, int data1);
 typedef void (*GWMsgEvent)(int status, char *msg, int length);
 typedef void (*GWVideoEvent)(char *data, int length);
+typedef void (*GWSecurityError)(int status);
 
-int gwPttInit(GWPttEvent event, GWMsgEvent event1, GWVideoEvent event2, char externalCodec, int encodeLevel, int frameSize, int frameNum, char softAEC);
+int gwPttInit(GWPttEvent event, GWMsgEvent event1, GWVideoEvent event2, GWSecurityError error, char externalCodec, int encodeLevel, int frameSize, int frameNum, char softAEC, char security);
 
 char *gwPttGetVersion(void);
 
@@ -273,4 +274,4 @@ int gwPttConfigAgeBalance(int balanceLevel);
 }
 #endif
 
-#endif //GWSD_GWSD_PTT_H
+#endif //GW_GW_PTT_H

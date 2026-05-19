@@ -5,15 +5,15 @@
  *      Author: hejingsheng
  */
 
-#ifndef GWSD_GWPTTENGINE_H
-#define GWSD_GWPTTENGINE_H
+#ifndef GW_GWPTTENGINE_H
+#define GW_GWPTTENGINE_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include "GWPttAudioDevice.h"
-#include "gwsd_ptt.h"
+#include "gw_ptt.h"
 
 #ifdef _WIN32
 #define DLL_EXPORT __declspec(dllexport)
@@ -23,11 +23,11 @@ extern "C" {
 
 typedef void (*print_log_cb)(char *log);
 
-DLL_EXPORT int pttInit(GWPttEvent cb, GWMsgEvent cb1, GWPttAudioModule *audioModule, char externalCodec, int encodeLevel, int framesize, int frameNum, char softAec);
+DLL_EXPORT int pttInit(GWPttEvent cb, GWMsgEvent cb1, GWSecurityError errcb, GWPttAudioModule *audioModule, char externalCodec, int encodeLevel, int framesize, int frameNum, char softAec, char security);
 
-DLL_EXPORT int pttInitFull(GWPttEvent cb, GWMsgEvent cb1, GWPttAudioModule *audioModule, char externalCodec, int encodeLevel, int framesize, int frameNum, char softAec);
+DLL_EXPORT int pttInitFull(GWPttEvent cb, GWMsgEvent cb1, GWSecurityError errcb, GWPttAudioModule *audioModule, char externalCodec, int encodeLevel, int framesize, int frameNum, char softAec, char security);
 
-DLL_EXPORT int pttInitMini(GWPttEvent cb, GWPttAudioModule *audioModule, char externalCodec, int encodeLevel, int framesize, int frameNum, char softAec);
+DLL_EXPORT int pttInitMini(GWPttEvent cb, GWSecurityError errcb, GWPttAudioModule *audioModule, char externalCodec, int encodeLevel, int framesize, int frameNum, char softAec, char security);
 
 DLL_EXPORT int pttSetLogCallback(int level, print_log_cb cb);
 
@@ -125,4 +125,4 @@ DLL_EXPORT int pttConfigAgeBalance(int balance);
 }
 #endif
 
-#endif /* GWSD_GWPTTENGINE_H */
+#endif /* GW_GWPTTENGINE_H */

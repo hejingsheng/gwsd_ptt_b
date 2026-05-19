@@ -5,8 +5,8 @@
  *      Author: hejingsheng
  */
 
-#ifndef COMPONENTS_GWSD_SDK_GWPTTAUDIODEVICE_H_
-#define COMPONENTS_GWSD_SDK_GWPTTAUDIODEVICE_H_
+#ifndef COMPONENTS_GW_SDK_GWPTTAUDIODEVICE_H_
+#define COMPONENTS_GW_SDK_GWPTTAUDIODEVICE_H_
 
 typedef struct
 {
@@ -19,4 +19,4 @@ typedef struct
 	void (*muteRecorder)(char mute);
 }GWPttAudioModule;
 
-#endif /* COMPONENTS_GWSD_SDK_GWPTTAUDIODEVICE_H_ */
+#endif /* COMPONENTS_GW_SDK_GWPTTAUDIODEVICE_H_ */

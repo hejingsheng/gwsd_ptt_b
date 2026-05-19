@@ -32,7 +32,7 @@
     <ClInclude Include="GWLog.h" />
     <ClInclude Include="GWPttAudioDevice.h" />
     <ClInclude Include="GWPttEngine.h" />
-    <ClInclude Include="gwsd_ptt.h" />
+    <ClInclude Include="gw_ptt.h" />
     <ClInclude Include="lc-addrlabels.h" />
     <ClInclude Include="lc-switch.h" />
     <ClInclude Include="lc.h" />

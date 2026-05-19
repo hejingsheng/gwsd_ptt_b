@@ -655,6 +655,11 @@ error:
 	}
 }
 
+static void onGWSecurityError(int status)
+{
+	printf("recv security error status %d\n", status);
+}
+
 static int configAddress(PttClient *client)
 {
 	char serverIp[33];
@@ -934,7 +939,7 @@ void pttClientStart(const char *account, const char *password, const char *dns, 
 	printf("gw ptt version %s\n", version);
 	pttControlLog(1, 1);
 
-	pttInit(onGWPttEvent, onGWMsgEvent, pttAudioDevice, 0, GW_PTT_ENCODE_LEVEL_HIGH, 0, 0, 0);
+	pttInit(onGWPttEvent, onGWMsgEvent, onGWSecurityError, pttAudioDevice, 0, GW_PTT_ENCODE_LEVEL_HIGH, 0, 0, 0, 1);
 
 	pttClient = (PttClient*)malloc(sizeof(PttClient));
 	assert(pttClient != NULL);
